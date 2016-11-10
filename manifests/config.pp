@@ -637,8 +637,8 @@ Kindly don't modify the key, password, v3auth-key and v3priv-auth-key from below
   }
 
   exec { 'apply_cimc_settings':
-    command => "ucscfg import $ucscfg::cimc_settings_file 999888 > cimc_output.txt",
-    unless  => "ucscfg export cimc_tmp.xml 999888; diff -w $ucscfg::cimc_settings_file cimc_tmp.xml > cimc_diff.txt",
+    command => "ucscfg import $ucscfg::cimc_settings_file 999888",
+    unless  => "ucscfg export cimc_tmp.xml 999888; diff -w $ucscfg::cimc_settings_file cimc_tmp.xml",
     cwd     => "$ucscfg::settings_dir",
     path    => "/bin:/usr/bin:$ucscfg::settings_dir",
     require => File["$ucscfg::settings_dir$ucscfg::cimc_settings_file"],
@@ -737,8 +737,8 @@ Kindly don't modify the key, password, v3auth-key and v3priv-auth-key from below
   }
 
   exec { 'apply_bios_settings':
-    command => "ucscfg batch set $ucscfg::bios_settings_file > output.txt",
-    unless  => "ucscfg show text /bios | diff -w $ucscfg::bios_settings_file - > diff.txt",
+    command => "ucscfg batch set $ucscfg::bios_settings_file",
+    unless  => "ucscfg show text /bios | diff -w $ucscfg::bios_settings_file -",
     cwd     => "$ucscfg::settings_dir",
     path    => "/bin:/usr/bin:$ucscfg::settings_dir",
     require => File["$ucscfg::settings_dir$ucscfg::bios_settings_file"],
